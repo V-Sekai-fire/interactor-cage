@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: If you use this bind, cite Thiery, Michel and Chen, whose biharmonic coordinates it computes.
+title: bhc13 -- the (1,3) biharmonic cage bind, deform and Jacobian (RFD 2279's shared deform surface)
+abstract: >-
+  net_from_mesh, bind(net, mesh, "bhc13"), weights, deform and jacobian
+  drive the Lean-emitted kernels in kernels/cage (see its CITATION.cff) for
+  the (1,3) biharmonic coordinates of src/BHC.h of
+  V-Sekai-fire/interactor-tool-godot-cage-deformer. The host code here
+  (net checks, the stepped BindJob, the normal pull-back) is written here;
+  no BHC.h source is copied. Checked against the native BHC.h oracle
+  (gates/9-cage, G1) and tests/cage_oracle.
+type: software
+authors:
+  - family-names: Thiery
+    given-names: Jean-Marc
+  - family-names: Michel
+    given-names: Elie
+  - family-names: Chen
+    given-names: Jiong
+repository-code: https://github.com/V-Sekai-fire/interactor-tool-godot-cage-deformer
+commit: f0b271620a4db16390101cc8ac2375c16680a9ab
+license: MIT
+references:
+  - type: conference-paper
+    title: Biharmonic Coordinates and their Derivatives for Triangular 3D Cages
+    authors:
+      - family-names: Thiery
+        given-names: Jean-Marc
+      - family-names: Michel
+        given-names: Elie
+      - family-names: Chen
+        given-names: Jiong
+    conference:
+      name: SIGGRAPH 2024
+    year: 2024
