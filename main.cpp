@@ -89,6 +89,19 @@ static Variant cage_weights() {
 	return packed(cageapi::weights());
 }
 
+static Variant cage_bake_skin(PackedArray<int32_t> knot_bones, PackedArray<float> knot_weights, int per_knot,
+		int max_influences) {
+	return text(cageapi::bake_skin(knot_bones.fetch(), knot_weights.fetch(), per_knot, max_influences));
+}
+
+static Variant cage_skin_bones() {
+	return packed(cageapi::skin_bones());
+}
+
+static Variant cage_skin_weights() {
+	return packed(cageapi::skin_weights());
+}
+
 static Variant cage_deform(PackedArray<float> knots_posed) {
 	return packed(cageapi::deform(knots_posed.fetch()));
 }
@@ -165,6 +178,11 @@ int main() {
 	ADD_API_FUNCTION(cage_result_u, "PackedFloat32Array", "", "The cage displacement u");
 	ADD_API_FUNCTION(cage_report, "String", "", "The loss terms and clearance at u");
 	ADD_API_FUNCTION(cage_weights, "PackedFloat32Array", "", "(Phi | Psi), P x (nV + nT)");
+	ADD_API_FUNCTION(cage_bake_skin, "String",
+			"PackedInt32Array knot_bones, PackedFloat32Array knot_weights, int per_knot, int max_influences",
+			"RFD 2279 bake_skin: knot bone weights through Phi to the bound points");
+	ADD_API_FUNCTION(cage_skin_bones, "PackedInt32Array", "", "The baked bones, P x max_influences (-1 unused)");
+	ADD_API_FUNCTION(cage_skin_weights, "PackedFloat32Array", "", "The baked weights, P x max_influences");
 	ADD_API_FUNCTION(cage_deform, "PackedFloat32Array", "PackedFloat32Array knots_posed",
 			"bhc13's deform: knots as nV x 12 [R | t]; translations only");
 	ADD_API_FUNCTION(cage_build, "String", "", "Phase C (NDMF build); a stub here");

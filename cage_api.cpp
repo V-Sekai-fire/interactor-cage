@@ -9,6 +9,7 @@
 #include <sstream>
 
 #include "bhc13/bhc13.h"
+#include "skin_bake.h"
 #include "cage_fit.h"
 #include "cage_net.h"
 #include "checks.h"
@@ -67,6 +68,7 @@ struct State {
 	deform::Bind bind;
 	cagefit::Body body;
 	cagefit::Skin skin;
+	deform::Skin baked;
 	std::vector<uint8_t> frozen;
 	cagefit::Params prm;
 	bool have_fit = false;
@@ -418,6 +420,28 @@ std::string report() {
 std::vector<float> weights() {
 	State &s = st();
 	return s.job >= J_BOUND && s.job != J_FAILED ? deform::weights(s.bind) : std::vector<float>();
+}
+
+std::string bake_skin(const std::vector<int32_t> &knot_bones, const std::vector<float> &knot_weights, int per_knot,
+		int max_influences) {
+	State &s = st();
+	if (s.job < J_BOUND || s.job == J_FAILED) {
+		return "FAIL: bake_skin needs a finished bind";
+	}
+	std::string err;
+	if (per_knot <= 0 || max_influences <= 0 ||
+			!deform::bake_skin(s.bind, knot_bones, knot_weights, uint32_t(per_knot), uint32_t(max_influences), s.baked, err)) {
+		return "FAIL: " + (err.empty() ? std::string("bake_skin: per_knot and max_influences must be positive") : err);
+	}
+	return fmt("ok baked P=%u influences=%u empty=%u", s.bind.P, s.baked.influences, s.baked.empty);
+}
+
+std::vector<int32_t> skin_bones() {
+	return st().baked.bones;
+}
+
+std::vector<float> skin_weights() {
+	return st().baked.weights;
 }
 
 std::vector<float> deform(const std::vector<float> &knots_posed) {

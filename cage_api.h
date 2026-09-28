@@ -57,6 +57,12 @@ std::vector<float> result();
 std::vector<float> result_u();
 std::string report();
 std::vector<float> weights();
+// RFD 2279 bake_skin over the bound Phi: knot bone weights (nV x per_knot, -1 unused) to
+// P x max_influences point weights, kept for skin_bones() / skin_weights().
+std::string bake_skin(const std::vector<int32_t> &knot_bones, const std::vector<float> &knot_weights, int per_knot,
+		int max_influences);
+std::vector<int32_t> skin_bones();
+std::vector<float> skin_weights();
 std::vector<float> deform(const std::vector<float> &knots_posed);
 std::string build();
 std::string preview();

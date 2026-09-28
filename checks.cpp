@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 #include "checks.h"
 
+#include "skin_bake.h"
+
+#include <algorithm>
 #include <cmath>
 #include <cstdarg>
 #include <cstdio>
@@ -124,6 +127,75 @@ constexpr float kClearTol = 1e-4f;
 bool clears(const cagefit::Report &r, float m) {
 	return r.inside == 0 && r.dmin >= m - kClearTol;
 }
+
+
+// S1: bake_skin on the sphere scene. Knots with x < 0 carry bone 0 and the rest
+// bone 1, so every point in the outer quarter of each side is mostly its own
+// side's bone and every row
+// must sum to 1. The control hands every knot bone 0 and must FAIL the split.
+static Out s1_run(bool control) {
+	Out o;
+	Scene &sc = scene();
+	if (!sc.ok) {
+		o.detail = "bind: " + sc.err;
+		return o;
+	}
+	const deform::Bind &b = sc.bind;
+	// Two slots a knot: knots on the plane (|x| < 1 mm) split evenly, so the check is symmetric.
+	std::vector<int32_t> kb(size_t(b.nV) * 2, -1);
+	std::vector<float> kw(size_t(b.nV) * 2, 0.0f);
+	uint32_t on_plane = 0;
+	for (uint32_t v = 0; v < b.nV; ++v) {
+		const float x = b.rest[3 * v];
+		if (control) {
+			kb[2 * v] = 0;
+			kw[2 * v] = 1.0f;
+		} else if (std::fabs(x) < 1e-3f) {
+			kb[2 * v] = 0; kw[2 * v] = 0.5f; kb[2 * v + 1] = 1; kw[2 * v + 1] = 0.5f;
+			++on_plane;
+		} else {
+			kb[2 * v] = x < 0.0f ? 0 : 1;
+			kw[2 * v] = 1.0f;
+		}
+	}
+	deform::Skin sk;
+	std::string err;
+	if (!deform::bake_skin(b, kb, kw, 2, 4, sk, err)) {
+		o.detail = err;
+		return o;
+	}
+	float xmin = 1e9f, xmax = -1e9f;
+	for (uint32_t p = 0; p < b.P; ++p) {
+		xmin = std::min(xmin, sc.s.garment[3 * p]);
+		xmax = std::max(xmax, sc.s.garment[3 * p]);
+	}
+	const float band = 0.25f * (xmax - xmin);
+	uint32_t left = 0, left_ok = 0, right = 0, right_ok = 0;
+	double worst_sum = 0.0;
+	for (uint32_t p = 0; p < b.P; ++p) {
+		float w0 = 0.0f, w1 = 0.0f, sum = 0.0f;
+		for (uint32_t k = 0; k < sk.influences; ++k) {
+			const int32_t bone = sk.bones[size_t(p) * sk.influences + k];
+			const float w = sk.weights[size_t(p) * sk.influences + k];
+			sum += w;
+			if (bone == 0) w0 += w;
+			if (bone == 1) w1 += w;
+		}
+		worst_sum = std::max(worst_sum, double(std::fabs(sum - 1.0f)));
+		const float x = sc.s.garment[3 * p];
+		if (x < xmin + band) { ++left; left_ok += w0 > 0.5f; }
+		if (x > xmax - band) { ++right; right_ok += w1 > 0.5f; }
+	}
+	o.pass = sk.empty == 0 && worst_sum < 1e-5 && left > 0 && right > 0 && left_ok == left && right_ok == right;
+	o.ints = { b.P, sk.empty, on_plane, left, left_ok, right, right_ok };
+	o.floats = sk.weights;
+	o.detail = fmt("%s: %u points (%u knots on the plane), empty %u, |row sum - 1| max %.2e; left band %u/%u bone 0 > 0.5, right band %u/%u bone 1 > 0.5",
+			control ? "control (every knot bone 0)" : "split at x = 0", b.P, on_plane, sk.empty, worst_sum, left_ok, left, right_ok, right);
+	return o;
+}
+
+static Out s1_skin() { return s1_run(false); }
+static Out s1_skin_control() { Out o = s1_run(true); o.pass = !o.pass; o.detail = "must FAIL the split: " + o.detail; return o; }
 
 Out g2_zero() {
 	Out o;
@@ -383,6 +455,8 @@ const Entry kChecks[] = {
 	{ "g4_corrupt", corrupt_step, g4_corrupt },
 	{ "g4_push", fit_step, g4_push },
 	{ "g4_open", scene_step, g4_open },
+	{ "s1_skin", scene_step, s1_skin },
+	{ "s1_skin_control", scene_step, s1_skin_control },
 };
 
 std::string line_of(const std::string &name, const Out &o) {
