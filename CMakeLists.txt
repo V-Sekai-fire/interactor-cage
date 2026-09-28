@@ -23,6 +23,7 @@ add_executable(cage_native
 	${R}/guest/cage/fixtures.cpp
 	${R}/guest/common/deform/bhc13/bhc13.cpp
 	${R}/guest/common/deform/cage_kernels.cpp
+	${R}/guest/common/deform/skin_bake.cpp
 	${R}/guest/drape/lbfgsb.cpp
 	${R}/guest/drape/vec_cpu.cpp
 )
