@@ -10,7 +10,7 @@
 #include <cstring>
 #include <memory>
 
-#include "../common/blake3.h"
+#include "common/blake3.h"
 #include "bhc13/bhc13.h"
 #include "cage_fit.h"
 #include "fit_driver.h"
