@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: If you use these kernels, cite Thiery, Michel and Chen, whose biharmonic coordinates they restate.
+title: Cage kernels (Lean-emitted) -- the (1,3) biharmonic bind and the in-motion cage fit
+abstract: >-
+  lean/Cage/SlangCodegen/*.lean restate, as LeanSlang compute kernels, the
+  (1,3) biharmonic coordinates for triangular 3D cages as src/BHC.h of
+  V-Sekai-fire/interactor-tool-godot-cage-deformer writes them
+  (get_signed_solid_angle, h_coordinates and its inside-triangle case,
+  bh_psi, bh_psi_gradient_in_tangent_plane, bh_phi, and
+  computeConstrainedBiharmonicMatrices_13 with its default gamma_D = 1 and
+  three subdivision levels), with the same expression order, in double.
+  Local adaptations: log and atan2 are series in +, -, x, /, sqrt and frexp
+  (SPIR-V's GLSL.std.450 Log and Atan2 take no 64-bit operands); Eigen's
+  inverse() is replaced by an in-place LU with partial pivoting and one
+  solve per right-hand side, on the normal equations G = A^T A + B^T B with
+  the right-hand side -A^T B (the Laplacian and Dirichlet samples coincide,
+  so R = -B exactly); the blend is w = h + X^T bh per point. No BHC.h source
+  is copied. The fit's kernels (normals and their VJP, the uniform Laplacian,
+  per-frame bone blend, LBS and its transpose, the body's pseudonormals,
+  the closest-point hinge, df32 sums, the winding number) are written here.
+  lake exe emit_cage writes the Slang, the pins and CageKernelTable.inc;
+  gen.sh compiles cpp/ and SPIR-V and embed_spv.cmake embeds it (no Python).
+  Checked against the native BHC.h oracle (gates/9-cage, G1).
+type: software
+authors:
+  - family-names: Thiery
+    given-names: Jean-Marc
+  - family-names: Michel
+    given-names: Elie
+  - family-names: Chen
+    given-names: Jiong
+repository-code: https://github.com/V-Sekai-fire/interactor-tool-godot-cage-deformer
+commit: f0b271620a4db16390101cc8ac2375c16680a9ab
+license: MIT
+references:
+  - type: conference-paper
+    title: Biharmonic Coordinates and their Derivatives for Triangular 3D Cages
+    authors:
+      - family-names: Thiery
+        given-names: Jean-Marc
+      - family-names: Michel
+        given-names: Elie
+      - family-names: Chen
+        given-names: Jiong
+    conference:
+      name: SIGGRAPH 2024
+    year: 2024

@@ -1,0 +1,25 @@
+# cage.elf's kernels (RFD 2277 Phase A), in Cage.Kernels.all's order (gen.sh
+# checks it). Every one is compiled for both targets: cpp (the in-guest CPU
+# path) and spirv (the GPU path over rd_compute). None shares group memory.
+# The bind (double precision):
+cage_bind_samples
+cage_bhc_coords
+cage_bind_gram
+cage_dense_lu
+cage_dense_lu_solve
+cage_bind_blend
+# The fit (float; its sums df32):
+cage_normals
+cage_normal_vjp
+cage_laplacian
+cage_sumsq
+cage_bone_blend
+cage_lbs
+cage_lbs_t
+cage_body_normals
+cage_body_vnormals
+cage_contact
+# The curvenet cage (double): generalized winding, the containment test.
+cage_winding
+# Reused, not listed here: anny_csr_gemv3 (kernels/anny: Φc, Ψn, Φᵀg, Ψᵀg and
+# the normal pull-back's corner gather) and saxpby (kernels/drape).
