@@ -65,10 +65,10 @@ namespace k_wind {
 #include "../../../kernels/cage/cpp/cage_winding_emit.cpp"
 }
 namespace k_csr {
-#include "../../../kernels/anny/cpp/anny_csr_gemv3_emit.cpp"
+#include "anny_csr_gemv3_emit.cpp"
 }
 namespace k_sx {
-#include "../../../kernels/drape/cpp/saxpby_emit.cpp"
+#include "saxpby_emit.cpp"
 }
 
 namespace cagek {
