@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: If you use these fixtures, cite LBFGSpp, Eigen and the biharmonic coordinates, which produce them.
+title: Cage-fit oracle generator (host-native test, not vendored)
+abstract: >-
+  gen.cpp is written here; nothing is vendored. build.sh clones
+  V-Sekai-fire/interactor-aria-lbfgspp at the pinned commit (LBFGSpp 0.3.0, MIT;
+  Eigen 3.4.90, MPL-2.0) and V-Sekai-fire/interactor-tool-godot-cage-deformer at
+  the pinned commit (src/BHC.h and src/point3.h, MIT) into .deps/ (gitignored),
+  and compiles gen.cpp against them unmodified. The only local adaptation is
+  wrapping the LBFGSB.h include in `#define private public`, as
+  tests/lbfgsb_oracle does. None of them is linked into any guest ELF.
+type: software
+authors:
+  - name: V-Sekai-fire
+  - name: chibifire
+references:
+  - type: software
+    title: interactor-aria-lbfgspp
+    repository-code: https://github.com/V-Sekai-fire/interactor-aria-lbfgspp
+    commit: 10086b6b2022802d7942ba16842c43063b3cff91
+  - type: software
+    title: interactor-tool-godot-cage-deformer
+    repository-code: https://github.com/V-Sekai-fire/interactor-tool-godot-cage-deformer
+    commit: f0b271620a4db16390101cc8ac2375c16680a9ab
+  - type: conference-paper
+    title: Biharmonic Coordinates and their Derivatives for Triangular 3D Cages
+    authors:
+      - family-names: Thiery
+        given-names: Jean-Marc
+      - family-names: Michel
+        given-names: Elie
+      - family-names: Chen
+        given-names: Jiong
+    conference:
+      name: SIGGRAPH 2024
