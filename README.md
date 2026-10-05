@@ -2,4 +2,19 @@
 
 The cage stage as a godot-sandbox guest: the (1,3) biharmonic bind and the in-motion cage fit on L-BFGS-B.
 
-Split out of `interactor-dress-on` at `310b52e` with its history (`git subtree`). It sits at `3-interactor/cage` in the goal manifest (`contract-manifest-taskweft`), and finds the repositories it builds against as sibling checkouts at their manifest paths. `transport-meshing-pen` builds the guest ELFs (`build.sh`, `tools/build.exs`).
+## What it is for
+
+The Lean tree states the cage kernels and emits them as Slang, which compiles for both the CPU and the GPU, so every kernel the guest runs comes from Lean. It builds against the repositories it needs as sibling checkouts at their goal-manifest paths, and `transport-meshing-pen` builds the guest ELFs. RFD 2277 owns the design.
+
+## Build and run
+
+```sh
+cd lean
+lake build
+```
+
+`kernels/cage/gen.sh` regenerates the kernels from Lean.
+
+## Licence
+
+The source files carry `Apache-2.0 OR MIT` SPDX headers; the repository has no licence file.
