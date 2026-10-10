@@ -17,4 +17,4 @@ lake build
 
 ## Licence
 
-The source files carry `Apache-2.0 OR MIT` SPDX headers; the repository has no licence file.
+MIT. See [LICENSE](LICENSE).
