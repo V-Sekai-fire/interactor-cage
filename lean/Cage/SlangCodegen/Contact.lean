@@ -19,7 +19,7 @@ wins, so ties go to the lower index on both targets.
     hb = √w_p · h                       (so Σ hb² = Σ_p w_p Σ_i h²)
     g_z = −2 w_p h ∇d
 
-This is the closest-point-with-pseudonormals form of `d_p`; RFD 2277
+This is the closest-point-with-pseudonormals form of `d_p`; RFD66606-2277
 names fit.elf's brick-grid SDF and the Lean tricubic sampler, which this
 base does not carry into a guest outside fit.elf. Brute force over the
 body's triangles: a gate-sized body, not an avatar's.

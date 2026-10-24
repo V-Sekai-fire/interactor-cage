@@ -6,7 +6,7 @@ import Cage
 
 Everything `kernels/cage/gen.sh` needs beyond `slangc` and the SPIR-V
 embedding (`kernels/cage/embed_spv.cmake`), in Lean, so the kernel build
-runs no Python (RFD 2239; the other stages' gen.sh call
+runs no Python (RFD66606-2239; the other stages' gen.sh call
 `embed_spv.py` and `gen_avbd_kernel_table.py`):
 
     lake exe emit_cage slang <dir>             write <dir>/<k>.slang for every kernel

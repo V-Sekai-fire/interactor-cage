@@ -1,4 +1,4 @@
-// cage_fit -- the in-motion cage fit (RFD 2277, "The guest"): move the cage
+// cage_fit -- the in-motion cage fit (RFD66606-2277, "The guest"): move the cage
 // in bind space so the garment clears the body in every sampled frame.
 //
 //   c = c0 + u                    the cage (knots) displaced by u, 3 nV
@@ -9,7 +9,7 @@
 //
 // d_p is the signed distance to the body skinned to frame p: the closest point
 // over the body's triangles, signed by its angle-weighted pseudonormal
-// (cage_contact). RFD 2277 names fit.elf's brick-grid SDF and the Lean
+// (cage_contact). RFD66606-2277 names fit.elf's brick-grid SDF and the Lean
 // tricubic sampler; that pair lives inside fit.elf (PolyFEM) on this base, so
 // this is the stated fallback. The gradient: each frame's g_z carried back
 // through LBS_p's linear part (cage_lbs_t), then Phi^T g plus the normal
@@ -31,7 +31,7 @@
 namespace cagefit {
 
 // The body skinned to each sampled frame (the host skins it, or cage.elf's
-// caller does; RFD 2277's cage_body_frames).
+// caller does; RFD66606-2277's cage_body_frames).
 struct Body {
 	uint32_t F = 0, BV = 0, T = 0;
 	std::vector<float> xyz;        // F x BV x 3

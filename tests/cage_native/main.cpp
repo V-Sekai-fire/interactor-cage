@@ -1,5 +1,5 @@
 // cage_native -- cage.elf's native flat control and the gates that read host
-// files (RFD 2277 Phase A, gates/9-cage). The same TUs as the ELF (guest/cage,
+// files (RFD66606-2277 Phase A, gates/9-cage). The same TUs as the ELF (guest/cage,
 // guest/common/deform, guest/drape's L-BFGS-B), compiled for the host.
 //
 //   cage_native checks                        G2, G3 (guest half), G4: the lines cage_check_all answers

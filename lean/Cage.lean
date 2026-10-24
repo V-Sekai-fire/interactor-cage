@@ -19,7 +19,7 @@ import Cage.SlangCodegen.Winding
 import Cage.Kernels
 
 /-!
-# `Cage` — cage.elf's kernels (RFD 2277 Phase A)
+# `Cage` — cage.elf's kernels (RFD66606-2277 Phase A)
 
 **The bind** (`bhc13`, double precision): the (1,3) biharmonic
 coordinates of Thiery, Michel and Chen, *Biharmonic Coordinates and their

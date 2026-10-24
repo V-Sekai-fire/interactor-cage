@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
-// RFD 2279's bake_skin for the bhc13 bind: each bound point takes the Phi-weighted
+// RFD66606-2279's bake_skin for the bhc13 bind: each bound point takes the Phi-weighted
 // blend of its knots' bone weights, clamped at zero, cut to the strongest
 // max_influences and renormalized.
 #pragma once
