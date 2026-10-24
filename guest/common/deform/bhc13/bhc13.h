@@ -1,5 +1,5 @@
-// bhc13 -- the (1,3) biharmonic cage deform: RFD 2279's `bhc13` method, the
-// internal C++ API its wrappers sit on (RFD 2277 owns it).
+// bhc13 -- the (1,3) biharmonic cage deform: RFD66606-2279's `bhc13` method, the
+// internal C++ API its wrappers sit on (RFD66606-2277 owns it).
 //
 // Thiery, Michel and Chen, "Biharmonic Coordinates and their Derivatives for
 // Triangular 3D Cages", SIGGRAPH 2024; restated from BHC.h of
@@ -9,7 +9,7 @@
 // and its Jacobian in float. This file holds topology checks, buffer layout
 // and staging only.
 //
-// The surface (RFD 2279's names):
+// The surface (RFD66606-2279's names):
 //   net_from_mesh(xyz, faces, counts)  a net from polygons of any size; they are
 //                                      triangulated (fanned from each polygon's
 //                                      first vertex) at bind time.
@@ -30,7 +30,7 @@
 //                                      triangle's vertices. nV x 3 (rotations get
 //                                      no cotangent: bhc13 ignores them).
 // Only "bhc13" is implemented; "harmonic", "idw", "lbs" and bake_skin are
-// RFD 2279's and are refused by name here.
+// RFD66606-2279's and are refused by name here.
 //
 // The guest has no filesystem; everything is std types, so the same code is
 // cage.elf's and the native gates' (tests/cage_native).

@@ -1,5 +1,5 @@
 # Embed kernels/cage's SPIR-V into the guest as byte arrays, without Python
-# (RFD 2239): the same header kernels/embed_spv.py writes for the other
+# (RFD66606-2239): the same header kernels/embed_spv.py writes for the other
 # stages -- one `static const uint8_t k_<name>[]` per .spv, sorted by name,
 # plus a name -> bytes table.
 #

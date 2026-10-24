@@ -2,7 +2,7 @@
 // guest/cage/main.cpp is the only TU that sees the sandbox's api.hpp; this and
 // everything under it compiles natively too, tests/cage_native).
 //
-// The engine is reached only through these entries (RFD 2277: the Godot-shaped
+// The engine is reached only through these entries (RFD66606-2277: the Godot-shaped
 // sandbox API, so the same calls work under Godot and under the Unity
 // sandbox). Arrays follow guest/common/mesh_wire.h (metres, CCW-outward).
 // Strings answer "ok ..." or "FAIL: ...". One stateful stage:
@@ -57,7 +57,7 @@ std::vector<float> result();
 std::vector<float> result_u();
 std::string report();
 std::vector<float> weights();
-// RFD 2279 bake_skin over the bound Phi: knot bone weights (nV x per_knot, -1 unused) to
+// RFD66606-2279 bake_skin over the bound Phi: knot bone weights (nV x per_knot, -1 unused) to
 // P x max_influences point weights, kept for skin_bones() / skin_weights().
 std::string bake_skin(const std::vector<int32_t> &knot_bones, const std::vector<float> &knot_weights, int per_knot,
 		int max_influences);

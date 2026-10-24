@@ -1,4 +1,4 @@
-# cage.elf's kernels (RFD 2277 Phase A), in Cage.Kernels.all's order (gen.sh
+# cage.elf's kernels (RFD66606-2277 Phase A), in Cage.Kernels.all's order (gen.sh
 # checks it). Every one is compiled for both targets: cpp (the in-guest CPU
 # path) and spirv (the GPU path over rd_compute). None shares group memory.
 # The bind (double precision):

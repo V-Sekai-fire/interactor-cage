@@ -1,4 +1,4 @@
-// cage_net -- curvenet patches to a closed cage (RFD 2277, "Curvenet to cage").
+// cage_net -- curvenet patches to a closed cage (RFD66606-2277, "Curvenet to cage").
 //
 // curvenet.elf's mesh_build merges its patches (welded, oriented away from the
 // body, CCW-outward per mesh_wire); that surface is open where the pen drew

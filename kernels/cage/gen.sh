@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# cage.elf's kernels (RFD 2277 Phase A), from Lean to both targets, with no
-# Python anywhere (RFD 2239): the other stages' gen.sh call embed_spv.py,
+# cage.elf's kernels (RFD66606-2277 Phase A), from Lean to both targets, with no
+# Python anywhere (RFD66606-2239): the other stages' gen.sh call embed_spv.py,
 # gen_avbd_kernel_table.py and tools/inline_prelude.py; here the Lean
 # emitter writes the Slang, the pins and the binding table, CMake embeds the
 # SPIR-V, and the shell inlines the slangc prelude.

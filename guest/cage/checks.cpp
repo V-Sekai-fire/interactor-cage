@@ -121,7 +121,7 @@ constexpr double kG2Tol = 1e-5;
 // The clearance test G3 and its push control share: nothing inside the body
 // and the closest vertex within 0.1 mm of the margin. The quadratic hinge
 // balances its last few vertices against the regularizers a hair below m,
-// so "0 below m" is reported, not required (RFD 2277 gate D asks it of the
+// so "0 below m" is reported, not required (RFD66606-2277 gate D asks it of the
 // avatar, where the fit margin will carry that headroom).
 constexpr float kClearTol = 1e-4f;
 bool clears(const cagefit::Report &r, float m) {

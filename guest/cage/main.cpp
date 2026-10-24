@@ -1,4 +1,4 @@
-// cage.elf -- the curvenet-cage refit stage (RFD 2277 Phase A): bhc13's bind
+// cage.elf -- the curvenet-cage refit stage (RFD66606-2277 Phase A): bhc13's bind
 // (guest/common/deform/bhc13), the in-motion cage fit on dress-on's
 // L-BFGS-B (guest/cage/cage_fit.h, fit_driver.h) and curvenet patches to a
 // closed cage (cage_net.h).
@@ -7,7 +7,7 @@
 // sees the sandbox's api.hpp; cage_api.cpp and below are std types and link
 // into tests/cage_native too. The engine is reached only through these
 // entries and the Godot-shaped sandbox API, so the same ELF runs under Godot
-// and under the Unity sandbox (RFD 2277 Phase B). Every ADD_API_FUNCTION has
+// and under the Unity sandbox (RFD66606-2277 Phase B). Every ADD_API_FUNCTION has
 // a no-argument wrapper in project/main.gd (AGENTS.md rule 8). No GPU: the CPU
 // path of every Lean kernel (their SPIR-V is emitted and validated, not yet
 // dispatched). Rule 4 and the operator's gas rule: cage_bind, cage_queue_fit,

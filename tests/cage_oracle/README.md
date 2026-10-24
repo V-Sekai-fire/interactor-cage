@@ -1,6 +1,6 @@
 # Cage-fit oracle (Gate 9, G3; host-native)
 
-`gen.cpp` restates RFD 2277's cage fit in double and solves it with unmodified
+`gen.cpp` restates RFD66606-2277's cage fit in double and solves it with unmodified
 LBFGSpp 0.3.0, so the Lean-emitted fit in `cage.elf` is checked against an
 independent solve:
 

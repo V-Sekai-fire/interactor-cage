@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: If you use this bind, cite Thiery, Michel and Chen, whose biharmonic coordinates it computes.
-title: bhc13 -- the (1,3) biharmonic cage bind, deform and Jacobian (RFD 2279's shared deform surface)
+title: bhc13 -- the (1,3) biharmonic cage bind, deform and Jacobian (RFD66606-2279's shared deform surface)
 abstract: >-
   net_from_mesh, bind(net, mesh, "bhc13"), weights, deform and jacobian
   drive the Lean-emitted kernels in kernels/cage (see its CITATION.cff) for

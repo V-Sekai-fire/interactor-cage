@@ -1,5 +1,5 @@
 // Cage-fit oracle (Gate 9, G3): host-native, double throughout. Restates the
-// cage fit of RFD 2277 and solves it with unmodified LBFGSpp 0.3.0, so the
+// cage fit of RFD66606-2277 and solves it with unmodified LBFGSpp 0.3.0, so the
 // Lean-emitted fit in cage.elf can be checked against an independent solve.
 //
 //   y_i  = sum_k Phi_ik (c0_k + u_k) + sum_t Psi_it n_t(c0 + u)      bind space
